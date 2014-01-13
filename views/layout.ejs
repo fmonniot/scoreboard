@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html data-ng-app="scoreboard">
+  <head>
+    <title>ScoreBoard</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="A simple scoreboard">
+    <meta name="author" content="François Monniot <francoismonniot@gmail.com>">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!--  
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `link` tags, or asynchronously
+        on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+        take advantage of Sails' boilerplate asset management.
+
+        By default, stylesheets from your `assets/linker/styles` folder are included
+        here automatically.  Both CSS (.css) and LESS (.less) are supported.
+        In production, your styles will be minified and concatenated into a single file.
+        
+        To customize any part of the built-in behavior, just edit your Gruntfile.
+        For example, here are a few things you could do:
+            
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/linker/styles/style.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/">Project name</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#/boards" data-active-link="active">Boards</a></li>
+            <li><a href="#/users" data-active-link="active">Users</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/about" data-active-link="active">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <%- body %>
+
+    <!--
+        Client-side Templates
+        ========================
+
+    		HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/linker/templates` folder, then
+        include them here automatically.
+        
+        To customize this behavior to fit your needs, just edit your Gruntfile.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your templates using a server-side stringfile
+              before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can 
+      take advantage of Sails' boilerplate asset management.
+
+      By default, filesin your `assets/linker/js` folder are included here
+      automatically.  Both JavaScript (.js) and CoffeeScript (.coffee) are supported.
+      In production, your scripts will be minified and concatenated into a single file.
+      
+      To customize any part of the built-in behavior, just edit your Gruntfile.
+      For example, here are a few things you could do:
+          
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <!--SCRIPTS-->
+    <script src="/libs/sails.io.js"></script>
+    <script src="/vendor/angular/angular.js"></script>
+    <script src="/vendor/angular-resource/angular-resource.js"></script>
+    <script src="/vendor/angular-route/angular-route.js"></script>
+    <script src="/vendor/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/vendor/angular-socket-io/socket.js"></script>
+    <script src="/vendor/highcharts/adapters/standalone-framework.js"></script>
+    <script src="/vendor/highcharts/highcharts.js"></script>
+    <script src="/vendor/highcharts-ng/src/directives/highcharts-ng.js"></script>
+    <script src="/linker/js/app.js"></script>
+    <script src="/linker/js/controllers.js"></script>
+    <script src="/linker/js/directives.js"></script>
+    <script src="/linker/js/services.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

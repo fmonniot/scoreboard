@@ -1,0 +1,23 @@
+{
+    "name": "scoreboard",
+    "private": true,
+    "version": "0.0.0",
+    "description": "A simple scoreboard server",
+    "dependencies": {
+        "sails": "0.9.8",
+        "grunt": "0.4.1",
+        "sails-mongo": "0.9.x",
+        "ejs": "0.8.4",
+        "optimist": "0.3.4",
+        "bower": "*"
+    },
+    "scripts": {
+        "postinstall": "./node_modules/bower/bin/bower install",
+        "start": "node app.js",
+        "debug": "node debug app.js"
+    },
+    "main": "app.js",
+    "repository": "https://github.com/fmonniot/scoreboard",
+    "author": "François Monniot <francoismonniot@gmail.com>",
+    "license": "MIT"
+}

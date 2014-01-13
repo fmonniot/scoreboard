@@ -1,0 +1,68 @@
+//
+// Navbars ( permit .active class on link element )
+// --------------------------------------------------
+
+// Default navbar
+.navbar-default {
+  .navbar-nav {
+    > li > a.active {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-active-color;
+        background-color: @navbar-default-link-active-bg;
+      }
+    }
+  }
+
+  // Dropdown menu items
+  .navbar-nav {
+    @media (max-width: @grid-float-breakpoint-max) {
+      // Dropdowns get custom display when collapsed
+      .open .dropdown-menu {
+        > li > a.active {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-default-link-active-color;
+            background-color: @navbar-default-link-active-bg;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Inverse navbar
+
+.navbar-inverse {
+  .navbar-nav {
+    > li > a.active {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-inverse-link-active-color;
+        background-color: @navbar-inverse-link-active-bg;
+      }
+    }
+  }
+
+
+  // Dropdowns
+  .navbar-nav {
+    @media (max-width: @grid-float-breakpoint-max) {
+      // Dropdowns get custom display
+      .open .dropdown-menu {
+        > li > a.active {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-inverse-link-active-color;
+            background-color: @navbar-inverse-link-active-bg;
+          }
+        }
+      }
+    }
+  }
+
+}

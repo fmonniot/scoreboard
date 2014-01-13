@@ -1,0 +1,34 @@
+
+// Tabs
+// -------------------------
+
+// Nav tabs inversed vertically
+.nav-tabs-inverse {
+  border-bottom: none;
+  border-top: 1px solid @nav-tabs-border-color;
+
+  > li {
+    // Make the list-items overlay the bottom border
+    margin-bottom: 1px;
+    margin-top: -1px;
+
+    // Actual tabs (as links)
+    > a {
+      border-radius: 0 0 @border-radius-base @border-radius-base;
+
+      &:hover {
+        border-color: @nav-tabs-border-color @nav-tabs-link-hover-border-color @nav-tabs-link-hover-border-color;
+      }
+    }
+
+    // Active state, and it's :hover to override normal :hover
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        border: 1px solid @nav-tabs-active-link-hover-border-color;
+        border-top-color: transparent;
+      }
+    }
+  }
+}

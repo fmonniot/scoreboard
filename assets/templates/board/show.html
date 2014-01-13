@@ -1,0 +1,29 @@
+<h1>{{ board.name }}
+  <div class="pull-right btn-group">
+    <button class="btn btn-primary btn-sm" data-ng-click="inviteUser()">Invite a user</button>
+    <button class="btn btn-default btn-sm" data-ng-click="createScore()">Create a new score</button>
+  </div>
+  <small>{{ board.participants || users.length }} participants
+    <span data-ng-show="board.maxParticipants">(up to {{ board.maxParticipants }} participants!)</span>
+  </small>
+</h1>
+<ul class="nav nav-tabs nav-tabs-inverse">
+  <li data-ng-class="{active: currentTab === 'graph'}"><a data-ng-href="#/board/{{ boardId }}/">Graph</a></li>
+  <li data-ng-class="{active: currentTab === 'entries'}"><a data-ng-href="#/board/{{ boardId }}/entries">Entries</a></li>
+  <li data-ng-class="{active: currentTab === 'users'}"><a data-ng-href="#/board/{{ boardId }}/users">Users</a></li>
+</ul>
+
+<div data-ng-if="currentTab === 'graph'"
+     data-ng-include="'templates/score/graph.html'"
+     data-ng-controller="ScoreGraphCtrl"></div>
+
+<div data-ng-if="currentTab === 'entries'"
+     data-ng-include="'templates/score/list.html'"></div>
+
+<div data-ng-if="currentTab === 'users'"
+     data-ng-include="'templates/board/users.html'"></div>
+
+<div class="alert alert-danger text-center col-sm-offset-4 col-sm-4" data-ng-show="networkError">
+  <h2>{{ networkError.title }}</h2>
+  <em>{{ networkError.message }}</em>
+</div>

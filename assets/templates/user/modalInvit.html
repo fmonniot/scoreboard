@@ -1,0 +1,29 @@
+<form class="form-horizontal" role="form" name="form">
+  <div class="modal-header">
+    <h3>Invit a user</h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="sUserId" class="col-sm-2 control-label">User</label>
+      <div class="col-sm-10" data-ng-class="{'has-error': form.sUserId.$invalid}">
+
+        <select class="form-control" id="sUserId" name="sUserId" required="required"
+                data-ng-options="u.name for u in users_available" data-ng-model="object.user">
+          <option value="">-- choose the user --</option>
+        </select>
+
+      <span class="help-block" data-ng-show="form.sUserId.$invalid">
+        <strong>Invalid:</strong>
+        <span data-ng-show="form.sUserId.$error.required">You need to select a user.</span>
+      </span>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-ng-click="ok()" data-ng-disabled="form.$invalid">Invite</button>
+    <button class="btn btn-default" data-ng-click="cancel()">Cancel</button>
+  </div>
+</form>
+
+

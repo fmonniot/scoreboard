@@ -1,0 +1,29 @@
+{
+  "name": "Scoreboard",
+  "version": "0.0.0",
+  "authors": [
+    "François Monniot <francoismonniot@gmail.com>"
+  ],
+  "description": "A simple scoreboard",
+  "componentsDirectory": "assets/vendor",
+  "license": "MIT",
+  "homepage": "http://francois.monniot.eu/scoreboard",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "angular": "~1.2.0",
+    "angular-route": "~1.2.0",
+    "angular-resource": "~1.2.0",
+    "angular-bootstrap": "~0.9.0",
+    "angular-socket-io": "~0.3.0",
+    "highcharts-ng": "~0.0.2",
+    "highcharts": "~3.0.7"
+  }
+}

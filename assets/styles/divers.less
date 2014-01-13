@@ -1,0 +1,31 @@
+
+// prevent content to be hidden by the top navbar
+body {
+  padding-top: @navbar-height + @navbar-margin-bottom;
+}
+
+// table with action
+.table-actions tr{
+
+  td, th {
+    text-align: center;
+  }
+
+  td:first-child, th:first-child {
+    text-align: left;
+  }
+
+  td:nth-child(2), th:nth-child(2) {
+    text-align: left;
+    width: 100%;
+  }
+
+  td:last-child, th:last-child {
+    white-space: nowrap;
+  }
+
+  button {
+    width: 6em;
+    display: inline-block;
+  }
+}

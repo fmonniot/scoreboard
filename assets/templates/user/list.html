@@ -1,0 +1,25 @@
+<div class="page-header">
+  <p class="pull-right">
+    <button class="btn btn-primary btn-lg" data-ng-click="create()">Create a new user</button>
+  </p>
+  <h1>User list</h1>
+</div>
+
+<table class="table table-striped table-actions">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr data-ng-repeat="user in users">
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>
+      <button class="btn btn-danger btn-sm" data-ng-click="del(user)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
