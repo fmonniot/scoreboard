@@ -36,7 +36,6 @@ angular.module('scoreboard.services', []).
           })
     }]).
     factory('modalConfirmationCtrl', function(){
-      // TODO Should rename object to subject
       return function ($scope, $modalInstance, object) {
         $scope.object = object;
 
@@ -48,4 +47,68 @@ angular.module('scoreboard.services', []).
           $modalInstance.dismiss('cancel');
         };
       }
-    });
+    }).
+    factory('modalBoard', ['$rootScope','$modal', 'Board', 'User', 'Score', 'modalConfirmationCtrl',
+      function($rootScope, $modal, Board, User, Score, modalConfirmationCtrl){
+        return {
+          inviteUser: function(boardId){
+            var $scope = $rootScope.$new(true);
+            $scope.users_available = User.search('{ "boards": { "$not" : {"contains": "'+boardId+'"}}}');
+
+            var modalInstance = $modal.open({
+              templateUrl: 'templates/user/modalInvit.html',
+              scope: $scope,
+              resolve: { object: function(){ return {}; } },
+              controller: modalConfirmationCtrl
+            });
+
+            modalInstance.result.then(function (object) {
+              Board.invite({boardId:boardId, userId: object.user.id}, {});
+            });
+          },
+
+          createScore: function(boardId){
+            var $scope = $rootScope.$new(true);
+            $scope.users_available = User.search('{ "boards": {"contains": "'+boardId+'"}}');
+
+            var modalInstance = $modal.open({
+              templateUrl: 'templates/score/modalCreate.html',
+              scope: $scope,
+              resolve: {
+                object: function () {
+                  return {score: new Score({boardId: boardId})};
+                }
+              },
+              controller: modalConfirmationCtrl
+            });
+
+            modalInstance.result.then(function (object) {
+              object.score.userId = object.user.id;
+              object.score.$save();
+            });
+          },
+
+          expel: function(boardId, user){
+            var $scope = $rootScope.$new(true);
+            var modalInstance = $modal.open({
+              templateUrl: 'templates/user/modalExpel.html',
+              scope: $scope,
+              controller: function ($scope, $modalInstance) {
+                $scope.user = user;
+
+                $scope.ok = function () {
+                  $modalInstance.close();
+                };
+
+                $scope.cancel = function () {
+                  $modalInstance.dismiss('cancel');
+                };
+              }
+            });
+
+            modalInstance.result.then(function () {
+              Board.expel({boardId:boardId, userId: user.id}, {});
+            });
+          }
+        };
+    }]);

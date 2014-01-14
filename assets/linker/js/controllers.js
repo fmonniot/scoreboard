@@ -55,15 +55,16 @@ angular.module('scoreboard.controllers', []).
       }
     }]).
     controller('BoardShowCtrl', [
-      '$scope', '$routeParams', '$route', 'Board', 'Score', 'User', 'modalConfirmationCtrl', '$modal', 'socket',
-      function($scope, $routeParams, $route, Board, Score, User, modalConfirmationCtrl, $modal, socket) {
+      '$scope', '$routeParams', '$route', 'Board', 'Score', 'User', 'socket', 'modalBoard',
+      function($scope, $routeParams, $route, Board, Score, User, socket, modalBoard) {
 
+        // Store the board Id for simpler reuse
         $scope.boardId = $routeParams.id;
+
+        // Listen socket.io messages
         socket.on('connect', function(){
           socket.emit('get', JSON.stringify({url:'/api/board/'+$scope.boardId+'/subscription'}));
         });
-
-        // Listen socket.io messages
         $scope.$on('socket:message', function(event, data){
           console.log('event socket:message with', data);
           if(data.uri == 'score/new') {
@@ -84,6 +85,7 @@ angular.module('scoreboard.controllers', []).
         // Store the tab selected
         $scope.currentTab = $route.current.tab;
 
+        // Load the current board (if none found, display an error)
         $scope.board = Board.get({boardId: $routeParams.id}, function(){}, function(response){
           var msg = {
             title: 'Error',
@@ -96,71 +98,16 @@ angular.module('scoreboard.controllers', []).
           $scope.networkError = msg;
         });
 
+        // Load users and scores of this board
         $scope.users = User.search('{ "boards": {"contains": "'+$scope.boardId+'"}}');
         $scope.scores = Score.query({boardId: $scope.boardId});
 
-        $scope.inviteUser = function(){
-          console.log('board id is %s',$scope.board.id);
-          // TODO abstract this in a custom method
-          $scope.users_available = User.search('{ "boards": { "$not" : {"contains": "'+$scope.board.id+'"}}}');
+        $scope.inviteUser = modalBoard.inviteUser;
 
-          var modalInstance = $modal.open({
-            templateUrl: 'templates/user/modalInvit.html',
-            scope: $scope,
-            resolve: { object: function(){return {}; } },
-            controller: modalConfirmationCtrl
-          });
-
-          modalInstance.result.then(function (object) {
-            Board.invite({boardId:$scope.boardId, userId: object.user.id}, {});
-          });
-        };
-
-        $scope.createScore = function(){
-          $scope.users_available = User.search('{ "boards": {"contains": "'+$scope.board.id+'"}}');
-
-          var modalInstance = $modal.open({
-            templateUrl: 'templates/score/modalCreate.html',
-            scope: $scope,
-            resolve: {
-              object: function () {
-                return {score: new Score({boardId: $scope.board.id})};
-              }
-            },
-            controller: modalConfirmationCtrl
-          });
-
-          modalInstance.result.then(function (object) {
-            var score = object.score;
-            score.userId = object.user.id;
-
-            score.$save();
-          });
-        }
-
-        $scope.expel = function(user){
-
-          var modalInstance = $modal.open({
-            templateUrl: 'templates/user/modalExpel.html',
-            scope: $scope,
-            controller: function ($scope, $modalInstance) {
-              $scope.user = user;
-
-              $scope.ok = function () {
-                $modalInstance.close();
-              };
-
-              $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-              };
-            }
-          });
-
-          modalInstance.result.then(function () {
-            Board.expel({boardId:$scope.boardId, userId: user.id}, {});
-          });
-
-        };
+        $scope.createScore = modalBoard.createScore;
+    }]).
+    controller('BoardUsersCtrl', ['$scope', 'modalBoard', function($scope, modalBoard){
+      $scope.expel = modalBoard.expel;
     }]).
     controller('ScoreGraphCtrl', ['$scope', '$q', function($scope, $q){
       // TODO Rewrite the directive to watch all the configuration
@@ -173,7 +120,7 @@ angular.module('scoreboard.controllers', []).
           findUserName[$scope.users[i].id] = $scope.users[i].name;
         }
 
-        // Match scores
+        // Match scores to players
         var scores = [], userPos;
         for(i = 0; i < $scope.scores.length; i++){
           userPos = players.indexOf(findUserName[$scope.scores[i].userId]);
@@ -184,11 +131,7 @@ angular.module('scoreboard.controllers', []).
           scores[userPos] += $scope.scores[i].value;
         }
 
-        if($scope.users.length > 0 && $scope.scores.length > 0) {
-          console.log('update graph with data');
-          console.table([players, scores]);
-        }
-
+        // Affect data
         $scope.xAxis.categories = players;
         $scope.series[0].data = scores;
       };
@@ -198,7 +141,7 @@ angular.module('scoreboard.controllers', []).
         updateData();
       }, true);
 
-      // Wait until users and scores are available
+      // Wait until users and scores are available to update data
       var promises = [];
       promises.push($scope.users);
       promises.push($scope.scores);

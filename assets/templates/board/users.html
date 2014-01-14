@@ -3,7 +3,6 @@
   <tr>
     <th>#</th>
     <th>Name</th>
-    <th>Boards</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -11,9 +10,8 @@
   <tr data-ng-repeat="user in users">
     <td>{{ user.id }}</td>
     <td>{{ user.name }}</td>
-    <td>{{ user.boards || 'none' }}</td>
     <td>
-      <button class="btn btn-warning btn-sm" data-ng-click="expel(user)">Expel</button>
+      <button class="btn btn-warning btn-sm" data-ng-click="expel(boardId, user)">Expel</button>
     </td>
   </tr>
   </tbody>

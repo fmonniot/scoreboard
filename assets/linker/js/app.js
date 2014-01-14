@@ -17,7 +17,7 @@ angular.module('scoreboard', [
     ]).
     config(['$routeProvider', function($routeProvider) {
 
-
+      // Boards route
       $routeProvider.when('/boards', {
         templateUrl: 'templates/board/list.html',
         controller: 'BoardListCtrl'
@@ -42,26 +42,21 @@ angular.module('scoreboard', [
         tab: 'users'
       });
 
+      // Users routes
       $routeProvider.when('/users', {
         templateUrl: 'templates/user/list.html',
         controller: 'UserListCtrl'
       });
 
+      // Divers
       $routeProvider.when('/about', {
         templateUrl: 'templates/about.html',
         controller: 'AboutCtrl'
       });
 
-      // Waiting to create a real home page
       $routeProvider.otherwise({redirectTo: '/boards'});
     }]).
     run(['socket', function(socket){
-      var logSocket = function(name){
-        socket.on(name, function(message){
-          console.log('New comet message received:', message);
-        });
-      };
-      logSocket('message');
       socket.forward('connect');
       socket.forward('message');
     }]);
