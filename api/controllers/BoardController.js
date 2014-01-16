@@ -17,8 +17,6 @@
 
 module.exports = {
 
-  // TODO Add some business rules (ex: /board/:id/invit/:userId with board.maxParticipants limit)
-
   subscribe: function(req){
     BoardSocketHelper.withSocket(req.socket).subscribeTo(req.param('id'));
   },

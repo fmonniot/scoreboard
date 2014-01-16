@@ -37,8 +37,6 @@ module.exports.routes = {
   },
 
   // Board
-  'get /api/board/:id/graph/:type':'BoardController.graph',
-
   'get /api/board/:id/subscription'   :'BoardController.subscribe',
   'delete /api/board/:id/subscription':'BoardController.unsubscribe',
   'post /api/board/:id/invite/:userId':'BoardController.invite',

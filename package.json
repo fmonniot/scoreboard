@@ -11,6 +11,13 @@
         "optimist": "0.3.4",
         "bower": "*"
     },
+    "devDependencies": {
+      "mocha": "*",
+      "chai": "*",
+      "chai-fuzzy":"*",
+      "chai-spies":"*",
+      "supertest": "*"
+    },
     "scripts": {
         "postinstall": "./node_modules/bower/bin/bower install",
         "start": "node app.js",
