@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 
     'vendor/highcharts/adapters/standalone-framework.js',
     'vendor/highcharts/highcharts.js',
-    'vendor/highcharts-ng/src/directives/highcharts-ng.js',
+    'vendor/highcharts-ng/dist/highcharts-ng.js',
 
     // *->    put other dependencies here   <-*
 
