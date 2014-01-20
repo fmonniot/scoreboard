@@ -24,19 +24,19 @@ module.exports = {
         console.log(err);
         res.send(500);
       }
-      BoardSocketHelper.withSocket(req.socket).publishNewScore(score);
+      BoardSocketHelper.withSocket(req.socket).inBoard(req.body.boardId).publishNewScore(score);
       res.send(200);
     });
   },
 
   createWithIp: function(req,res){
-    User.findOne({ip:req.param('ip')}, function(err, user){
+    User.findOne({ip:req.body.ip}, function(err, user){
       if(err) {
         console.log(err);
-        res.send(500);
+        return res.send(500);
       }
       if(undefined === user) {
-        res.send(406);
+        return res.send(406);
       }
 
       var scoreReq = req.body;
@@ -44,10 +44,10 @@ module.exports = {
       Score.create(scoreReq, function(err, score){
         if(err){
           console.log(err);
-          res.send(500);
+          return res.send(500);
         }
         BoardSocketHelper.withSocket(req.socket).publishNewScore(score);
-        res.send(200);
+        return res.send(200);
       });
     })
   }
