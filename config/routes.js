@@ -44,6 +44,7 @@ module.exports.routes = {
 
   // Score
 
+  'post /api/score/fromIp' : 'ScoreController.createWithIp',
 
   // User
   'post /api/user/search': 'UserController.search'
