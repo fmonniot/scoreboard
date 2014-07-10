@@ -17,13 +17,13 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.0.3",
+    "bootstrap": "~3.2",
     "angular": "~1.2.0",
     "angular-route": "~1.2.0",
     "angular-resource": "~1.2.0",
-    "angular-bootstrap": "~0.9.0",
-    "angular-socket-io": "~0.3.0",
+    "angular-bootstrap": "~0.11",
+    "angular-socket-io": "~0.6",
     "highcharts-ng": "~0.0.2",
-    "highcharts": "~3.0.7"
+    "highcharts": "~4"
   }
 }

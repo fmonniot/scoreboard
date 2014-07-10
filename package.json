@@ -1,30 +1,30 @@
 {
-    "name": "scoreboard",
-    "private": true,
-    "version": "0.0.0",
-    "description": "A simple scoreboard server",
-    "dependencies": {
-        "sails": "0.9.8",
-        "grunt": "0.4.1",
-        "sails-mongo": "0.9.x",
-        "ejs": "0.8.4",
-        "optimist": "0.3.4",
-        "bower": "*"
-    },
-    "devDependencies": {
-      "mocha": "*",
-      "chai": "*",
-      "chai-fuzzy":"*",
-      "chai-spies":"*",
-      "supertest": "*"
-    },
-    "scripts": {
-        "postinstall": "./node_modules/bower/bin/bower install",
-        "start": "node app.js",
-        "debug": "node debug app.js"
-    },
-    "main": "app.js",
-    "repository": "https://github.com/fmonniot/scoreboard",
-    "author": "François Monniot <francoismonniot@gmail.com>",
-    "license": "MIT"
+  "name": "scoreboard",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A simple scoreboard server",
+  "dependencies": {
+    "bower": "*",
+    "ejs": "^1.0",
+    "grunt": "^0.4.5",
+    "optimist": "^0.6.x",
+    "sails": "^0.9.8",
+    "sails-mongo": "0.9.x"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "chai-fuzzy": "*",
+    "chai-spies": "*",
+    "supertest": "*"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "start": "node app.js",
+    "debug": "node debug app.js"
+  },
+  "main": "app.js",
+  "repository": "https://github.com/fmonniot/scoreboard",
+  "author": "François Monniot <francoismonniot@gmail.com>",
+  "license": "MIT"
 }
